@@ -4,5 +4,6 @@ import { AppModule } from './app.module';
 (async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.enableCors();
   await app.listen(8000, '0.0.0.0');
 })();

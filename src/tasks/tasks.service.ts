@@ -49,6 +49,7 @@ export class TasksService {
         message: 'Update failed. Id not found',
       });
     }
+
     return this.taskRepository.remove(task);
   }
 

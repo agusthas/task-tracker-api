@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from '../tasks/entities/task.entity';
 import { Repository } from 'typeorm';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Todo } from './entities/todo.entity';
 
 @Injectable()
@@ -24,19 +23,14 @@ export class TodosService {
     return newTodo;
   }
 
-  findAll() {
-    return `This action returns all todos`;
+  async update(id: string): Promise<Todo> {
+    const todo = await this.todoRepository.findOneOrFail(id);
+    todo.isCompleted = !todo.isCompleted;
+    return this.todoRepository.save(todo);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
-  }
-
-  update(id: number, updateTodoDto: UpdateTodoDto) {
-    return `This action updates a #${id} todo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  async remove(id: string): Promise<Todo> {
+    const todo = await this.todoRepository.findOneOrFail(id);
+    return this.todoRepository.remove(todo);
   }
 }

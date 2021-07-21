@@ -20,8 +20,15 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "typeorm-seeding": "ts-node ./node_modules/typeorm-seeding/dist/cli.js",
+    "schema:log": "yarn typeorm schema:log",
+    "schema:drop": "yarn typeorm schema:drop",
+    "seed:config": "yarn typeorm-seeding config",
+    "seed:run": "yarn typeorm-seeding seed",
     "migration:generate": "yarn typeorm migration:generate -n",
-    "migration:run": "yarn typeorm migration:run"
+    "migration:run": "yarn typeorm migration:run",
+    "migration:show": "yarn typeorm migration:show",
+    "db:setup": "yarn schema:drop && yarn migration:run && yarn seed:run"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -36,7 +43,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.34"
+    "typeorm": "^0.2.34",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
